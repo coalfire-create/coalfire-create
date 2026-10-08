@@ -1,0 +1,28 @@
+{
+    "$schema": "https://apify.com/schemas/v1/actor.ide.json",
+    "actorSpecification": 1,
+    "name": "ts-mcp-proxy",
+    "title": "TypeScript MCP proxy",
+    "description": "TypeScript Model Context Protocol proxy.",
+    "version": "0.0",
+    "buildTag": "latest",
+    "usesStandbyMode": true,
+    "meta": {
+        "templateId": "ts-mcp-proxy",
+        "generatedBy": "<FILL-IN-MODEL>"
+    },
+    "inputSchema": {
+        "title": "Actor input schema",
+        "description": "This is Actor input schema",
+        "type": "object",
+        "schemaVersion": 1,
+        "properties": {},
+        "required": []
+    },
+    "outputSchema": "./output_schema.json",
+    "storages": {
+        "dataset": "./dataset_schema.json"
+    },
+    "dockerfile": "../Dockerfile",
+    "webServerMcpPath": "/mcp"
+}
