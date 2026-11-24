@@ -1,130 +1,28 @@
-## MCP server template
+<h1 align="center">coalfire-create</h1>
+<p align="center">정답이 <b>검증되는</b> 교육·AI 도구와 3D 웹을 만듭니다.<br>Building verified math tools, AI apps and 3D web experiences.</p>
 
-<!-- This is an Apify template readme -->
+---
 
-A template for running and monetizing a [Model Context Protocol](https://modelcontextprotocol.io) server using [stdio](https://modelcontextprotocol.io/docs/concepts/transports#standard-input%2Foutput-stdio) transport on [Apify platform](https://docs.apify.com/platform).
-This allows you to run any stdio MCP server as a [standby Actor](https://docs.apify.com/platform/actors/development/programming-interface/standby) and connect via either the [streamable HTTP transport](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#streamable-http) with an [MCP client](https://modelcontextprotocol.io/clients).
+### ⭐ Featured
 
-## How to use
+<a href="https://github.com/coalfire-create/csat-forge">
+  <img src="https://raw.githubusercontent.com/coalfire-create/csat-forge/main/docs/assets/social-preview.png" alt="csat-forge" width="640">
+</a>
 
-Change the `MCP_COMMAND` to spawn your stdio MCP server in `src/main.ts`, and don't forget to install the required MCP server in the `package.json` (using `npm install ...`).
-By default, this template runs an [Everything MCP Server](https://github.com/modelcontextprotocol/servers/tree/main/src/everything) using the following command:
+**[csat-forge](https://github.com/coalfire-create/csat-forge)** — 정답을 맞히는 게 아니라 *계산하는* 수능 수학 문제 생성기. SymPy로 정답부터 정하고 문제를 만들어요. 킬러 문제 합성, 오답 의도 진단까지. &nbsp;**[▶ 브라우저에서 바로 체험](https://coalfire-create.github.io/csat-forge/)**
 
-```
-const MCP_COMMAND = [
-    'npx',
-    '@modelcontextprotocol/server-everything',
-];
-```
+---
 
-Alternatively, you can use the [`mcp-remote`](https://www.npmjs.com/package/mcp-remote) tool to turn a remote MCP server into an Actor. For example, to connect to a remote server with authentication:
+### 🛠 Projects
 
-```
-const MCP_COMMAND = [
-    'npx',
-    'mcp-remote',
-    'https://mcp.apify.com',
-    '--header',
-    'Authorization: Bearer TOKEN',
-];
-```
+| | |
+|---|---|
+| [**Yongtong-YiGang**](https://github.com/coalfire-create/Yongtong-YiGang) | 학원 공식 홈페이지 + 관리자 시스템 (React · Express · Supabase) |
+| [**playseat**](https://github.com/coalfire-create/playseat) | 차의 모든 좌석이 DJ 부스가 되는 차량용 앱 |
+| [**koreanvoteguide**](https://github.com/coalfire-create/koreanvoteguide) | 선거 정보를 쉽게 보여주는 앱 |
+| [**ai-interrogation-game**](https://github.com/coalfire-create/ai-interrogation-game) | LLM NPC와 심문하는 Unity 게임 |
+| 대학 홍보 3D 랜딩 시리즈 | [snu-80-landing](https://github.com/coalfire-create/snu-80-landing) · [yonsei-blue-flight](https://github.com/coalfire-create/yonsei-blue-flight) · [khu-rose-window](https://github.com/coalfire-create/khu-rose-window) · [ku-crimson-roar](https://github.com/coalfire-create/ku-crimson-roar) · [mju-landing](https://github.com/coalfire-create/mju-landing) |
 
-Feel free to configure billing logic in `.actor/pay_per_event.json` and `src/billing.ts`.
+---
 
-[Push your Actor](https://docs.apify.com/academy/deploying-your-code/deploying) to the Apify platform, configure [standby mode](https://docs.apify.com/platform/actors/development/programming-interface/standby), and then connect to the Actor standby URL with your MCP client using the endpoint: `https://me--my-mcp-server.apify.actor/mcp` ([streamable HTTP transport](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#streamable-http)).
-
-**Important:** When connecting to your deployed MCP server, you must pass your Apify API token in the `Authorization` header as a Bearer token. For example:
-
-```
-Authorization: Bearer <YOUR_APIFY_API_TOKEN>
-```
-
-This is required for authentication and to access your Actor endpoint.
-
-### Pay per event
-
-This template uses the [Pay Per Event (PPE)](https://docs.apify.com/platform/actors/publishing/monetize#pay-per-event-pricing-model) monetization model, which provides flexible pricing based on defined events.
-
-To charge users, define events in JSON format and save them on the Apify platform. Here is an example schema with the `tool-request` event:
-
-```json
-[
-    {
-        "tool-request": {
-            "eventTitle": "Price for completing a tool request",
-            "eventDescription": "Flat fee for completing a tool request.",
-            "eventPriceUsd": 0.05
-        }
-    }
-]
-```
-
-In the Actor, trigger the event with:
-
-```typescript
-await Actor.charge({ eventName: 'tool-request' });
-```
-
-This approach allows you to programmatically charge users directly from your Actor, covering the costs of execution and related services.
-
-To set up the PPE model for this Actor:
-
-- **Configure Pay Per Event**: establish the Pay Per Event pricing schema in the Actor's **Monetization settings**. First, set the **Pricing model** to `Pay per event` and add the schema. An example schema can be found in [pay_per_event.json](.actor/pay_per_event.json).
-
-## Resources
-
-- [What is Anthropic's Model Context Protocol?](https://blog.apify.com/what-is-model-context-protocol/)
-- [How to use MCP with Apify Actors](https://blog.apify.com/how-to-use-mcp/)
-- [Apify MCP server](https://mcp.apify.com)
-- [Apify MCP server documentation](https://docs.apify.com/platform/integrations/mcp)
-- [Apify MCP client](https://apify.com/jiri.spilka/tester-mcp-client)
-- [Model Context Protocol documentation](https://modelcontextprotocol.io)
-- [TypeScript tutorials in Academy](https://docs.apify.com/academy/node-js)
-- [Apify SDK documentation](https://docs.apify.com/sdk/js/)
-
-
-## Getting started
-
-For complete information [see this article](https://docs.apify.com/platform/actors/development#build-actor-at-apify-console). In short, you will:
-
-1. Build the Actor
-2. Run the Actor
-
-## Pull the Actor for local development
-
-If you would like to develop locally, you can pull the existing Actor from Apify console using Apify CLI:
-
-1. Install `apify-cli`
-
-    **Using Homebrew**
-
-    ```bash
-    brew install apify-cli
-    ```
-
-    **Using NPM**
-
-    ```bash
-    npm -g install apify-cli
-    ```
-
-2. Pull the Actor by its unique `<ActorId>`, which is one of the following:
-    - unique name of the Actor to pull (e.g. "apify/hello-world")
-    - or ID of the Actor to pull (e.g. "E2jjCZBezvAZnX8Rb")
-
-    You can find both by clicking on the Actor title at the top of the page, which will open a modal containing both Actor unique name and Actor ID.
-
-    This command will copy the Actor into the current directory on your local machine.
-
-    ```bash
-    apify pull <ActorId>
-    ```
-
-## Documentation reference
-
-To learn more about Apify and Actors, take a look at the following resources:
-
-- [Apify SDK for JavaScript documentation](https://docs.apify.com/sdk/js)
-- [Apify SDK for Python documentation](https://docs.apify.com/sdk/python)
-- [Apify Platform documentation](https://docs.apify.com/platform)
-- [Join our developer community on Discord](https://discord.com/invite/jyEM2PRvMU)
+<sub>Python · TypeScript · React · Three.js · SymPy · Supabase</sub>
